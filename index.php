@@ -118,7 +118,7 @@ $ultimo_acesso = $u->getUltimoAcesso($id_user);
             <p class="text-white"><?php echo $post['texto'];?></p>
         </div>
         <div class="flex justify-content-around mg-b10">
-            <button class="curtir refresh" id="<?php echo $post['id_post'];?>">
+            <button onclick="curtir(<?php echo $post['id_post'];?>)" class="curtir refresh" id="<?php echo $post['id_post'];?>">
                 <div>
                     <i id="coracao_post<?php echo $post['id_post'];?>"class="fa fa-heart" <?php echo "style=font-size:28px;color:".$cor_coracao;?>></i>
                 </div>
