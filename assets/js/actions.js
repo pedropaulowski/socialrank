@@ -23,6 +23,7 @@ $(function(){
 
 function atualizar() {
 
+		
 		var nickname = document.querySelector('#nick').value;
         var nick = 'nick='+nickname
         
@@ -34,39 +35,11 @@ function atualizar() {
 
 		
 		beforeSend : function(){
-			$(function(){
-				$('.curtir').on('click', function(e){
-					var id_post = $(this).attr("id");
-					var txt = "id_post="+id_post;
-					var curtidas_post = "#curtidas_post"+id_post;
-					var coracao_post = "#coracao_post"+id_post;
 			
+		}
+
 			
-					//enviar para o arquivo php
-					//Só falta fazer o arquivo PHP... 
-			
-					$.ajax({
-						type: 'POST',
-						url: 'curtir.php',
-						data: txt,
-						dataType:'json',
-			
-						success:function(json){
-							$(curtidas_post).html(json.qtd_curtidas);
-							if($(coracao_post).css('color') == "rgb(255, 255, 255)")
-								$(coracao_post).css('color', 'red');
-							else 
-								$(coracao_post).css('color', 'white')
-						}, 
-						error:function() {
-							alert("Você não está cadastrado");
-						}
-					});
-				});
-				
-			})
-			
-        }
+		
 	})
 		.done(function(json){
 
@@ -89,8 +62,8 @@ function atualizar() {
 						dataType:'json',
 						success:function(json){
 							var img_url = json.img_url;
-							$("#posts-content").prepend('<div class="border2-white flex-column post  mg-t5 mg-b120"><div class="flex" ><div class="img-circle"><img src="'+img_url+'" class="img" id="img-profile-post"/></div><div class="mg-t30 mg-l30"><a class="text-white"href="perfil.php?nick='+nickname+'&&pagina=0"><b>@'+nickname+'</b></a></div></div><div class="text-center mg-b10"><p class="text-white">'+texto+'</p></div><div class="flex justify-content-around mg-b10"><button class="curtir refresh" id="'+id_post+'"><div><i id="coracao_post'+id_post+'"class="fa fa-heart" style="font-size:28px;color:white"></i></div><div id="curtidas_post'+id_post+'" style="color:white">'+curtidas+'</div></button><div><p class="text-white font-12">'+hora+'</p></div></div></div>')
-
+							$("#posts-content").prepend('<div class="border2-white flex-column post  mg-t5 mg-b120"><div class="flex" ><div class="img-circle"><img src="'+img_url+'" class="img" id="img-profile-post"/></div><div class="mg-t30 mg-l30"><a class="text-white"href="perfil.php?nick='+nickname+'&&pagina=0"><b>@'+nickname+'</b></a></div></div><div class="text-center mg-b10"><p class="text-white">'+texto+'</p></div><div class="flex justify-content-around mg-b10"><button onclick="curtir('+id_post+')"class="curtir refresh" id="'+id_post+'"><div><i id="coracao_post'+id_post+'"class="fa fa-heart" style="font-size:28px;color:white"></i></div><div id="curtidas_post'+id_post+'" style="color:white">'+curtidas+'</div></button><div><p class="text-white font-12">'+hora+'</p></div></div></div>')
+							
 						}, 
 						error:function() {
 							$("#erro").removeClass("hidden");
@@ -112,13 +85,14 @@ function atualizar() {
 		})
 
 		
+
+		
 		
 
 }
 
-/*$(function(){
-	$('.curtir').on('click', function(e){
-		var id_post = $(this).attr("id");
+function curtir(id_post){
+		var id_post = id_post;
 		var txt = "id_post="+id_post;
 		var curtidas_post = "#curtidas_post"+id_post;
 		var coracao_post = "#coracao_post"+id_post;
@@ -144,7 +118,6 @@ function atualizar() {
 				alert("Você não está cadastrado");
 			}
 		});
-	});
-	
-})
-*/
+
+
+}
