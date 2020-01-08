@@ -67,7 +67,7 @@ $entrada = date('F y', $entrada);
     
 </head>
 
-<body class="bg-white">
+<body class="bg-white" onload="carregarComentarios('menor')">
     <header class="witdth flex justify-content-center bg-black fixed-top height">
         <div>
             <h1 class="title text-white"> 
@@ -242,7 +242,7 @@ $entrada = date('F y', $entrada);
                 </div>
             </div>
         <div>
-        <div class="flex flex-column align-content-center align-items-center">
+        <div class="flex flex-column align-content-center align-items-center" id="comentarios">
         <h3 class="title text-black mg-t20">Comentários</h3>
         <a class="text-black mg-t20" id="msg"></a>
         <?php if($_GET['nick'] != $_SESSION['nick'] && !empty($_SESSION['nick'])):?>
@@ -257,7 +257,7 @@ $entrada = date('F y', $entrada);
                 <p id="texto-coment"></p>
                 <p class="coments-hora" id="hora-coment"></p> 
             </div>
-        <?php endif;?>
+        <?php endif;/*?>
         <?php
             $id_destinatario = $id_user;
             if($c->getComentarios($pagina, $id_destinatario) != false){
@@ -276,7 +276,7 @@ $entrada = date('F y', $entrada);
                 </div>
         <?php endforeach;}else{?>
             
-        <?php }?>
+        <?php }*/?>
 
         </div>        
     </div>
@@ -290,11 +290,10 @@ $entrada = date('F y', $entrada);
         <?php if($_SESSION['nick'] == $_GET['nick']) echo '<a class="text-black mg-t5" href="logout.php">LOG OUT</a>'; else echo '<a class="text-black mg-t5" href="perfil.php?nick='.$_SESSION['nick'].'&&pagina=0">PERFIL</a>'; ?>
     <?php endif;?>
     </footer>
-    <?php if($_GET['nick'] == $_SESSION['nick']):?>
     <script type="text/javascript" src="./assets/js/jquery-3.4.1.min.js"></script>
+    <?php if($_GET['nick'] == $_SESSION['nick']):?>
     <script type="text/javascript" src="./assets/js/perfil.js"></script>
     <?php else:?>
-    <script type="text/javascript" src="./assets/js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="./assets/js/coment.js"></script>
     <?php endif;?>
     <script type="text/javascript" src="./assets/js/voto.js"></script>

@@ -1,24 +1,23 @@
 $(function(){
 	$('#coment').bind('submit', function(e){
 		e.preventDefault();
-		var comentario = $("#comentario-now").val();
         var txt = $(this).serialize();
 		//enviar para o arquivo php
 
 		$.ajax({
 			type: 'GET',
 			url: 'coment.php',
-			data: txt,
-		
-			success:function(data){
-			$("#live").removeClass("hidden");
-			$("#texto-coment").html(comentario);
-			$("#hora-coment").html("Agora");
-			$("#comentario-now").val() = '';
+			data: txt+'&&tipo=maior',
+			dataType:'json',
+			success:function(json){
+				console.log(json);
+				$.each(json, function(i, item) {
+					var comentario = json[i].comentario
+					var	hora = json[i].hora;
+					$("#comentarios").append('<div class="coments text-black mg-t10 mg-b10 word-break-break"><p>'+comentario+'</p><p class="coments-hora">'+hora+'</p> </div>');
+
+				});
 			}, 
-			error:function() {
-             alert("ERRO");
-            }
 		});
 	});
 	
@@ -50,6 +49,24 @@ $(function(){
 	
 });
 
+function carregarComentarios(tipo) {
+        var txt = 'nick='+document.querySelector('#nick').innerHTML+'&&tipo='+tipo;
+		//enviar para o arquivo php
+		$.ajax({
+			type: 'GET',
+			url: 'coment.php',
+			data: txt,
+			dataType:'json',
+			success:function(json){
+				$.each(json, function(i, item) {
+					var comentario = json[i].comentario
+					var	hora = json[i].hora;
+					$("#comentarios").append('<div class="coments text-black mg-t10 mg-b10 word-break-break"><p>'+comentario+'</p><p class="coments-hora">'+hora+'</p> </div>');
 
+				});
+			}, 
+		});
+
+}
 
 

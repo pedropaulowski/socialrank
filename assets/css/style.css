@@ -89,6 +89,13 @@
     margin-top: 3.5px;
     height: 20px;
 }
+.coment{
+    border:1px solid black;
+    background-color: white;
+    margin-top: 3.5px;
+    height: 20px;
+    padding-top: 10px;
+}
 .submit{
     border:3px solid black;
     background-color: white;
@@ -124,6 +131,19 @@
     height: 200px;
     transition-duration: 200ms;
 }
+.img-circle-coment{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 40px;
+    height: 40px;
+}
+#img-profile-coment{
+    width: 40px;
+}
 .img-circle{
     display: flex;
     align-items: center;
@@ -136,6 +156,9 @@
 }
 .width200{
     width: 200px;
+}
+#form-coment{
+    padding-top: 8px;
 }
 #img {
     height: 80px;
@@ -227,6 +250,16 @@
 
 .mg-b120{
     margin-bottom:120px;
+}
+.mg-b20{
+    margin-bottom:20px;
+}
+.mg-b50{
+    margin-bottom:50px;
+}
+#div-to-coment{
+    border: 1px solid white;
+    padding: 20px
 }
 .mg-b10{
     margin-bottom:10px;

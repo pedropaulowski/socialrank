@@ -105,7 +105,7 @@ $ultimo_acesso = $u->getUltimoAcesso($id_user);
             else 
                 $cor_coracao = "white";
     ?>  
-    <div class="border2-white flex-column post  mg-t5 mg-b120">
+    <div class="border2-white flex-column post  mg-t5">
         <div class="flex" >
             <div class="img-circle">
                 <img src="<?php echo $u->getImgUrlById($post['id_criador']);?>" class="img" id="img-profile-post"/>
@@ -132,6 +132,16 @@ $ultimo_acesso = $u->getUltimoAcesso($id_user);
             echo  date("d-m h:i:s",strtotime( $post['hora']));?></p>
             </div>
         </div>
+
+    </div>
+    <div class="flex justify-content-center mg-b50" id="div-to-coment">
+        <div class="img-circle-coment">
+            <img src="<?php echo $u->getImgUrlById($id_user);?>" class="img-coment" id="img-profile-coment"/>
+        </div>
+        <form method="GET" id="form-coment">
+            <textarea id="<?php echo "comentariotopost".$post['id_post'];?>" class="coment text-black" type="text" name="nick" placeholder="Comentário..."></textarea>
+        </form>
+        <button class="submit mg-t10" onclick="comentar(<?php echo $post['id_post'];?>,document.querySelector('#comentariotopost<?php echo $post['id_post'];?>').value)" ></button>
     </div>
     <?php
         endforeach;
