@@ -6,11 +6,15 @@ require "assets/classes/notas.class.php";
 require "assets/classes/usuarios.class.php";
 require "assets/classes/posts.class.php";
 require "assets/classes/curtidas.class.php";
+require "assets/classes/comentarios.class.php";
+
 
 $p = new Posts();
 $u = new Usuarios();
 $i = new Imagens();
 $c = new Curtidas();
+$com = new Comentarios();
+
 
 
 
@@ -72,7 +76,7 @@ $ultimo_acesso = $u->getUltimoAcesso($id_user);
     <div class="flex-column border2-white mg-t5">
         <div class="flex" >
             <div class="img-circle">
-               <img src="<?php echo $img_url;?>" class="img"/>
+               <img id="img-profile-to-post" src="<?php echo $img_url;?>" class="img"/>
             </div>
             <div class="mg-t30 mg-l30">
                 <a class="text-white"href="<?php echo "perfil.php?nick=".$nick."&&pagina=0";?>" >
@@ -134,6 +138,27 @@ $ultimo_acesso = $u->getUltimoAcesso($id_user);
         </div>
 
     </div>
+    <?php
+        $pag= 1;
+        $coments = $com->getComentariosPosts($post['id_post'], $pag);
+        foreach($coments as $comentarios):
+    ?>
+    <div class="flex justify-content-center">
+        <div class="flex align-items-center justify-content-between coments text-white text-center word-break-break bg-black">
+            <div class="img-circle-coment">
+                <img src="<?php echo $u->getImgUrlById($comentarios['id_remetente']);?>" class="img-coment" id="img-profile-coment"/>
+            </div>
+            <div>
+                <p style="font-size: 14px;"><?php echo $comentarios['comentario'];?></p>
+            </div>
+
+            <p class="coments-hora">2020-01-07 21:37:30</p> 
+        </div>
+    </div>
+
+    <?php
+        endforeach;
+    ?>
     <div class="flex justify-content-center mg-b50" id="div-to-coment">
         <div class="img-circle-coment">
             <img src="<?php echo $u->getImgUrlById($id_user);?>" class="img-coment" id="img-profile-coment"/>
