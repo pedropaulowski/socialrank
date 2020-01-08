@@ -432,5 +432,39 @@
     justify-content: space-between;
     width: 60px;
 }
+/*
+# Bem-vindos à wiki do Social Rank!
+    
+Social Rank é uma rede social de avaliação dos usuários pelos usuários. Comecei com o intuito de colocar meus
+conhecimentos de PHP em prática, apesar do projeto não ter uma arquitetura definida. 
 
+## Sobre o Banco de Dados
+   
+O banco de dados, atualmente é dividido em 8 tabelas 
+1. Comentários
+2. Curtidas
+3. Denuncias (ainda não utilizada)
+4. Imagens 
+5. Notas
+6. Posts
+7. Seguidores
+8. Usuários
+
+## Sobre as Funcionalidades da Rede
+
+As funcionalidades, no momento, são muito simples. No Social Rank você pode:
+1. Seguir/Deixar de seguir um usuário
+2. Comentar sua opinião sobre uma pessoa no seu respectivo perfil
+3. Avaliar de 1 a 5 outros usuários
+4. Fazer publicações
+5. Curtir comentários de publicações e posts
+6. Trocar a foto de perfil deliberadamente, podendo utilizar até mesmo GIFs
+7. Escrever uma descrição sobre você em seu perfil e mudá-la quando quiser
+
+
+### Algumas imagens
+OBS: Quanto ao péssimo design da rede eu me desculpo. Quando iniciei a rede, o design não era algo que eu estava me preocupando, mas fim foi uma péssima decisão.
+
+### Para utilizar a rede em localhost bastar ter o php e o apache instalados, então é só ter a pasta /socialrank
+no mesmo diretório de seus projetos.
   
