@@ -59,7 +59,16 @@ class Comentarios {
         return $sql;
 
     }
+    public function getComentariosPosts($id_post, $pagina) {
+        $sql = "SELECT * FROM comentarios WHERE id_post = :id_post ORDER BY curtidas DESC LIMIT ".$pagina;
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(":id_post", $id_post);
+        $sql->execute();
+        $sql = $sql->fetchAll(PDO::FETCH_ASSOC);
         
+        return $sql;
+    }
+
     private function existeComentario($id_remetente, $id_destinatario) {
         $sql = "SELECT * FROM comentarios WHERE id_remetente = :id_remetente AND id_destinatario = :id_destinatario";
         $sql = $this->pdo->prepare($sql);
