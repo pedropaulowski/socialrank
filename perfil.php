@@ -206,7 +206,7 @@ $entrada = date('F y', $entrada);
                 </svg>
             </a>
         </div>
-        <div class="flex text-black width-315 flex-column justify-content-center margin-auto mg-t10 mg-l3">
+        <div id="content-user" class="flex text-black width-315 flex-column justify-content-center margin-auto mg-t10 mg-l3">
             <a><b>Média: <a id="media" ><?php echo $media;?></a></b></a>
             <a class="mg-t10">Since <?php echo $entrada;?></a>
             <h3 <?php if($_GET['nick'] == $_SESSION['nick']) echo 'onclick="editDescription()"';?>class=" mg-t10">Descrição:</h3>
@@ -246,7 +246,7 @@ $entrada = date('F y', $entrada);
         <h3 class="title text-black mg-t20">Comentários</h3>
         <a class="text-black mg-t20" id="msg"></a>
         <?php if($_GET['nick'] != $_SESSION['nick'] && !empty($_SESSION['nick'])):?>
-            <div class="coments text-black mg-t10 mg-b10">
+            <div class="coments coments-profile text-black mg-t10 mg-b10">
                 <form method="GET" id="coment">
                     <input type="text" name="nick" id="nick" value="<?php echo $nick;?>"hidden/>
                     <textarea id="comentario-now" class="mg-l20 bg-white text-black form-description" name="comentario" placeholder="Escreva um comentário... Max(140 caracteres)" maxlength="140"></textarea>

@@ -93,7 +93,7 @@
     border: 1px solid black;
     background-color: white;
     height: 50px;
-    width: 255;
+    width: 220;
 }
 .submit{
     border:3px solid black;
@@ -141,7 +141,7 @@
     height: 40px;
 }
 #img-profile-coment{
-    width: 40px;
+    height: 40px;
 }
 .img-circle{
     display: flex;
@@ -276,15 +276,19 @@
     margin-top: 10px;
 }
 .coments{
-    max-width: 540px;
-    min-width: 290px;
+    width: 100%;
     min-height: 50px;
-    width: 95%;
     border:1px solid white;
     border-top-left-radius: 1%;
     border-bottom-left-radius: 1%;
-    box-shadow: 3px 3px 3px 3px black;
     font-size: 16pt;
+}
+.coments-profile{
+    box-shadow: 5px 5px 5px 5px;
+    width: 90%;
+}
+#content-user{
+    width: 90%;
 }
 .coments-hora{
     font-size: 11pt;

@@ -14,7 +14,7 @@ $(function(){
 				$.each(json, function(i, item) {
 					var comentario = json[i].comentario
 					var	hora = json[i].hora;
-					$("#comentarios").append('<div class="coments text-black mg-t10 mg-b10 word-break-break"><p>'+comentario+'</p><p class="coments-hora">'+hora+'</p> </div>');
+					$("#comentarios").append('<div class="coments coments-profile text-black mg-t10 mg-b10 word-break-break"><p>'+comentario+'</p><p class="coments-hora">'+hora+'</p> </div>');
 
 				});
 			}, 
@@ -61,7 +61,7 @@ function carregarComentarios(tipo) {
 				$.each(json, function(i, item) {
 					var comentario = json[i].comentario
 					var	hora = json[i].hora;
-					$("#comentarios").append('<div class="coments text-black mg-t10 mg-b10 word-break-break"><p>'+comentario+'</p><p class="coments-hora">'+hora+'</p> </div>');
+					$("#comentarios").append('<div class="coments coments-profile text-black mg-t10 mg-b10 word-break-break"><p>'+comentario+'</p><p class="coments-hora">'+hora+'</p> </div>');
 
 				});
 			}, 
