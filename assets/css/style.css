@@ -90,11 +90,10 @@
     height: 20px;
 }
 .coment{
-    border:1px solid black;
+    border: 1px solid black;
     background-color: white;
-    margin-top: 3.5px;
-    height: 20px;
-    padding-top: 10px;
+    height: 50px;
+    width: 255;
 }
 .submit{
     border:3px solid black;
