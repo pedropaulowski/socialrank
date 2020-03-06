@@ -7,14 +7,14 @@ require "assets/classes/usuarios.class.php";
 require "assets/classes/posts.class.php";
 require "assets/classes/curtidas.class.php";
 require "assets/classes/comentarios.class.php";
-
+require "assets/classes/notificacoes.class.php";
 
 $p = new Posts();
 $u = new Usuarios();
 $i = new Imagens();
 $c = new Curtidas();
 $com = new Comentarios();
-
+$not = new Notificacoes();
 
 
 
@@ -41,7 +41,7 @@ $ultimo_acesso = $u->getUltimoAcesso($id_user);
 
 </head>
 
-<body class="bg-black" onload="atualizar()"id="body">
+<body class="bg-black" onload="carre()" id="body">
     <header class="flex flex-column align-items-center bg-white">
         <div><h1><a class="title text-black"href="./">Beetle</a></h1></div>
         <div class="flex">
@@ -50,6 +50,7 @@ $ultimo_acesso = $u->getUltimoAcesso($id_user);
                 <input class="submit"type="submit" value=">" />
             </form>
         </div>
+       
     </header>
     
     <div class="flex justify-content-center mg-t30 hidden" id="perfil">
@@ -175,8 +176,29 @@ $ultimo_acesso = $u->getUltimoAcesso($id_user);
     <form class="width-320 margin-auto" method="POST" id="atualizar">
         <input type="text" name="nick" id="nick_bottom" value="<?php echo $nick;?>"hidden/>
         <footer class="witdth flex justify-content-around bg-white fixed-bottom height">
-            <button type="submit" class="refresh"><a class="text-black mg-t5" >FEED</a></button>
+            <div class="refresh"><a class="text-black bg-white mg-t5" >FEED</a>    <b><a id="notifications" onclick="showNotifications()">0</a></b></div>
+            <div class="aba-notifications bg-white">
+                <?php
+                $posts = $not->postsDoUsuario($id_user);
+                $hora_curtida = $u->getCurtidasHora($id_user);
+                $hora_coment = $u->getNotificacoesHora($id_user);
+                   // <div class="coments coments-profile text-black mg-t10 mg-b10 word-break-break"><p>'+nick+' curtiu um post seu.</p><p class="coments-hora">'+hora+'</p></div>
+                $now = date("Y-m-d H:i:s");
+                $lista = $not->arrayAntigasNotificacoes($hora_curtida, $hora_coment, $posts);
 
+                foreach ($lista as $notficacoes):
+                    $u_curtido = $u->getNickById($notficacoes['usuariocurtida']);
+                    $u_comentario = $u->getNickById($notficacoes['usuariocomentario']);
+                    $hora_curtida = $notficacoes['horacurtida'];
+                    $hora_comentario = $notficacoes['horacomentario'];
+                    $comentario = $notficacoes['comentario'];
+               ?>
+                
+                <div class="coments coments-profile text-black mg-t10 mg-b10 word-break-break"><p><?php echo $u_curtido;?> curtiu um post seu.</p><p class="coments-hora"><?php echo $hora_curtida;?></p></div>
+                <div class="coments coments-profile text-black mg-t10 mg-b10 word-break-break"><p><?php echo $u_comentario;?> comentou: <?php echo $comentario; ?>.</p><p class="coments-hora"><?php echo $hora_comentario;?></p></div>
+                
+                <?php endforeach;?>
+            </div>
             <a class="text-black mg-t5" href="rank.php?qtde=10">RANK</a>
             <a class="text-black mg-t5" href="perfil.php?nick=<?php echo $_SESSION['nick']."&&pagina=0";?>">PERFIL</a>
         </footer>

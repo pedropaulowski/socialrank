@@ -6,6 +6,7 @@ require "assets/classes/seguidores.class.php";
 require "assets/classes/notas.class.php";
 require "assets/classes/usuarios.class.php";
 require "assets/classes/comentarios.class.php";
+require "assets/classes/notificacoes.class.php";
 
 if(!isset($_SESSION['nick']) || empty($_SESSION['nick'])){
     $_SESSION['nick'] = '';
@@ -15,7 +16,7 @@ $c = new Comentarios();
 $n = new Notas();
 $u = new Usuarios();
 $img = new Imagens();
-
+$not = new Notificacoes();
 $nick = addslashes($_GET['nick']);
 $descricao = utf8_encode($u->getDescricaoByNick($nick));
 $id_user = $u->getIdByNick($nick);
@@ -67,7 +68,7 @@ $entrada = date('F y', $entrada);
     
 </head>
 
-<body class="bg-white" onload="carregarComentarios('menor')">
+<body class="bg-white" onload="carre('menor')">
     <header class="witdth flex justify-content-center bg-black fixed-top height">
         <div>
             <h1 class="title text-white"> 
@@ -285,17 +286,44 @@ $entrada = date('F y', $entrada);
         <a class="text-black mg-t5"href="login.php">LOGIN</a>
         <a class="text-black mg-t5" href="cadastrar.php">CADASTRE-SE</a>
     <?php else:?>
-        <a class="text-black mg-t5"href="./">FEED</a>
-        <a class="text-black mg-t5" href="rank.php?qtde=10">RANK</a>
+        <div class="refresh"><a class="text-black bg-white mg-t5" href="index.php" >FEED</a>    <b><a id="notifications" onclick="showNotifications()">0</a></b></div>
+            <div class="aba-notifications bg-white">
+            <?php if(isset($_SESSION['nick']) && !empty($_SESSION['nick'])):
+                $posts = $not->postsDoUsuario($id_user);
+                $hora_curtida = $u->getCurtidasHora($id_user);
+                $hora_coment = $u->getNotificacoesHora($id_user);
+                   // <div class="coments coments-profile text-black mg-t10 mg-b10 word-break-break"><p>'+nick+' curtiu um post seu.</p><p class="coments-hora">'+hora+'</p></div>
+                $now = date("Y-m-d H:i:s");
+                $lista = $not->arrayAntigasNotificacoes($hora_curtida, $hora_coment, $posts);
+
+                foreach ($lista as $notficacoes):
+                    $u_curtido = $u->getNickById($notficacoes['usuariocurtida']);
+                    $u_comentario = $u->getNickById($notficacoes['usuariocomentario']);
+                    $hora_curtida = $notficacoes['horacurtida'];
+                    $hora_comentario = $notficacoes['horacomentario'];
+                    $comentario = $notficacoes['comentario'];
+
+               ?>
+                
+                <div class="coments coments-profile text-black mg-t10 mg-b10 word-break-break"><p><?php echo $u_curtido;?> curtiu um post seu.</p><p class="coments-hora"><?php echo $hora_curtida;?></p></div>
+                <div class="coments coments-profile text-black mg-t10 mg-b10 word-break-break"><p><?php echo $u_comentario;?> comentou: <?php echo $comentario; ?>.</p><p class="coments-hora"><?php echo $hora_comentario;?></p></div>
+                
+                <?php endforeach;
+                endif;?>
+            </div>
+            <a class="text-black mg-t5" href="rank.php?qtde=10">RANK</a>
         <?php if($_SESSION['nick'] == $_GET['nick']) echo '<a class="text-black mg-t5" href="logout.php">LOG OUT</a>'; else echo '<a class="text-black mg-t5" href="perfil.php?nick='.$_SESSION['nick'].'&&pagina=0">PERFIL</a>'; ?>
     <?php endif;?>
     </footer>
     <script type="text/javascript" src="./assets/js/jquery-3.4.1.min.js"></script>
     <?php if($_GET['nick'] == $_SESSION['nick']):?>
-    <script type="text/javascript" src="./assets/js/perfil.js"></script>
+        <script type="text/javascript" src="./assets/js/perfil.js"></script>
     <?php else:?>
-    <script type="text/javascript" src="./assets/js/coment.js"></script>
+        <script type="text/javascript" src="./assets/js/coment.js"></script>
     <?php endif;?>
     <script type="text/javascript" src="./assets/js/voto.js"></script>
+    <?php if(isset($_SESSION['nick']) && !empty($_SESSION['nick'])):?>
+        <script type="text/javascript" src="./assets/js/notificacoes.js"></script>
+    <?php endif;?>
 </body>
 </html>

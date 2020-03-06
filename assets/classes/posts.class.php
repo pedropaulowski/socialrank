@@ -198,6 +198,20 @@ class Posts {
            return false;
        }
     }
+
+    public function postAgora($id_criador, $hora) {
+        $sql = "SELECT * FROM posts WHERE id_criador = :id_criador AND hora >= :hora";
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(":id_criador", $id_criador);
+        $sql->bindValue(":hora", $hora);
+        $sql->execute();
+
+        if($sql->rowCount() > 0){
+            return true;
+       } else {
+           return false;
+       }
+    }
 }
 
 ?>

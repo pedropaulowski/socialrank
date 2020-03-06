@@ -162,6 +162,52 @@ class Usuarios{
         return true;
     }
 
+    public function getNotificacoesHora($id_user) {
+        $sql = "SELECT * FROM usuarios WHERE id_user = :id_usuario";
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(":id_usuario", $id_user);
+        $sql->execute();
+
+        if($sql->rowCount() > 0) {
+            $sql = $sql->fetch();
+            return $sql['notificacoes'];
+        } else {
+            return false;
+        }
+    }
+
+    public function getCurtidasHora($id_user) {
+        $sql = "SELECT * FROM usuarios WHERE id_user = :id_usuario";
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(":id_usuario", $id_user);
+        $sql->execute();
+
+        if($sql->rowCount() > 0) {
+            $sql = $sql->fetch();
+            return $sql['curtidas_hr'];
+        } else {
+            return false;
+        }
+    }
+
+    public function setCurtidasHora($id_user, $curtidas_hr) {
+        $sql = "UPDATE usuarios SET curtidas_hr = '".$curtidas_hr."' WHERE id_user = :id_usuario";
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(":id_usuario", $id_user);
+        $sql->execute();
+
+        return true;
+    }
+
+    public function setNotificacoesHora($id_user, $notificacoes) {
+        $sql = "UPDATE usuarios SET notificacoes = '".$notificacoes."' WHERE id_user = :id_usuario";
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(":id_usuario", $id_user);
+        $sql->execute();
+
+        return true;
+    }
+
     public function getEntradaByNick($nick) {
         $sql = "SELECT * FROM usuarios WHERE nick = :nick";
         $sql = $this->pdo->prepare($sql);

@@ -14,7 +14,7 @@ $(function(){
 				$.each(json, function(i, item) {
 					var comentario = json[i].comentario
 					var	hora = json[i].hora;
-					$("#comentarios").append('<div class="coments coments-profile text-black mg-t10 mg-b10 word-break-break"><p>'+comentario+'</p><p class="coments-hora">'+hora+'</p> </div>');
+					$("#comentarios").append('<div class="coments bg-not coments-profile text-black mg-t10 mg-b10 word-break-break"><p>'+comentario+'</p><p class="coments-hora">'+hora+'</p> </div>');
 
 				});
 			}, 
@@ -49,24 +49,6 @@ $(function(){
 	
 });
 
-function carregarComentarios(tipo) {
-        var txt = 'nick='+document.querySelector('#nick').innerHTML+'&&tipo='+tipo;
-		//enviar para o arquivo php
-		$.ajax({
-			type: 'GET',
-			url: 'coment.php',
-			data: txt,
-			dataType:'json',
-			success:function(json){
-				$.each(json, function(i, item) {
-					var comentario = json[i].comentario
-					var	hora = json[i].hora;
-					$("#comentarios").append('<div class="coments coments-profile text-black mg-t10 mg-b10 word-break-break"><p>'+comentario+'</p><p class="coments-hora">'+hora+'</p> </div>');
 
-				});
-			}, 
-		});
-
-}
 
 
