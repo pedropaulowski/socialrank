@@ -13,20 +13,21 @@ $u = new Usuarios();
 $hora = date('Y-m-d H:i:s');
 if(isset($_SESSION['nick'])) {
     set_time_limit(60);
-    $nick = $_SESSION['nick'];
+    $nick = $_POST['nick'];
     $id = $u->getIdByNick($nick);
 
     $ult_att = $u->getCurtidasHora($id);
-    $id_posts = $n->postsDoUsuario($id);
+    
 
-    while(true) {
+    while(isset($_SESSION['nick'])) {
         session_write_close();
 
+        $id_posts = $n->postsDoUsuario($id);
         $curtidas = $n->arrayNovasCurtidasPosts($ult_att, $id_posts);
 
-        if(count($curtidas) > 0 && isset($_SESSION['nick']) && !empty($_SESSION['nick'])) {
+        if(count($curtidas) > 0) {
             $ult_att = date("Y-m-d H:i:s");
-            $u->setCurtidasHora($id, $ult_att);
+            $u->setCurtidasHora($id);
             break;
         } else {
             sleep(2);

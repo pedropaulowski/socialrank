@@ -11,8 +11,8 @@ class Usuarios{
     public function setUsuario($email, $senha, $nome, $nick, $qr_code, $media, $descricao) {
         
         if($this->existeUsuario($email)==false && $this->existeNick($nick) == false) {
-            $sql = "INSERT INTO usuarios (email, img_url, senha, nome, nick, qr_code, media, descricao, hora, ult_acesso) 
-            VALUES (:email, :img_url, :senha, :nome, :nick, :qr_code, :media, :descricao, NOW(), NOW())";
+            $sql = "INSERT INTO usuarios (email, img_url, senha, nome, nick, qr_code, media, descricao, hora, ult_acesso, notificacoes, curtidas_hr) 
+            VALUES (:email, :img_url, :senha, :nome, :nick, :qr_code, :media, :descricao, NOW(), NOW(), NOW(), NOW())";
             $sql = $this->pdo->prepare($sql);
             $sql->bindValue(":email", $email);
             $sql->bindValue(":img_url", 'imagens/3a4e09be45efd325e35c1aab218b354c.gif');
@@ -190,19 +190,19 @@ class Usuarios{
         }
     }
 
-    public function setCurtidasHora($id_user, $curtidas_hr) {
-        $sql = "UPDATE usuarios SET curtidas_hr = '".$curtidas_hr."' WHERE id_user = :id_usuario";
+    public function setCurtidasHora($id_user) {
+        $sql = "UPDATE usuarios SET curtidas_hr = NOW() WHERE id_user = :id_user";
         $sql = $this->pdo->prepare($sql);
-        $sql->bindValue(":id_usuario", $id_user);
+        $sql->bindValue(":id_user", $id_user);
         $sql->execute();
 
         return true;
     }
 
-    public function setNotificacoesHora($id_user, $notificacoes) {
-        $sql = "UPDATE usuarios SET notificacoes = '".$notificacoes."' WHERE id_user = :id_usuario";
+    public function setNotificacoesHora($id_user) {
+        $sql = "UPDATE usuarios SET notificacoes = NOW() WHERE id_user = :id_user";
         $sql = $this->pdo->prepare($sql);
-        $sql->bindValue(":id_usuario", $id_user);
+        $sql->bindValue(":id_user", $id_user);
         $sql->execute();
 
         return true;

@@ -20,12 +20,13 @@ if(!isset($_SESSION['nick']) || empty($_SESSION['nick'])) {
     $nick = $_SESSION['nick'];
     $id_remetente = $u->getIdByNick($nick);
     $ult_acesso = $u->getUltimoAcesso($id_remetente);
+    
+    session_write_close();
 
     if(!isset($_GET['id_post']) || empty($_GET['id_post']) || isset($_GET['tipo']) || !empty($_GET['tipo'])) {
         $tipo = $_GET['tipo'];
         if(isset($_GET['comentario']) && !empty($_GET['comentario'])){
             $comentario = $_GET['comentario'];
-            
             $c->comentar($id_remetente, $id_destinatario, $comentario, $id_post);
             $c->jsonComentarios($id_destinatario, $tipo, $ult_acesso);
             if($tipo != 'menor') {

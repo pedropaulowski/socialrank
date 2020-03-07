@@ -155,10 +155,8 @@ function notificacoes() {
 		
 	})
 	.done(function(json){
-			var j = 0
 
 			$.each(json, function(i, item) {
-				j++;
 				var texto = json[i].comentario
 				var hora = json[i].hora
 				var id_remetente = "id="+json[i].id_remetente;
@@ -173,7 +171,7 @@ function notificacoes() {
 						//console.log(nick+" cometou em seu post: "+ texto+" às "+hora)
 						var qtd = parseInt(document.querySelector("#notifications").innerHTML)
 						var feed = document.querySelector("#notifications")
-						feed.innerHTML = j+qtd
+						feed.innerHTML = qtd + 1;
 						$('.aba-notifications').prepend('<div class="coments bg-not coments-profile text-black mg-t10 mg-b10 word-break-break"><p>'+nick+' comentou: '+texto+'</p><p class="coments-hora">'+hora+'</p></div>')
 					}, 
 				});
@@ -226,10 +224,8 @@ function curtidas() {
 		
 	})
 	.done(function(json){
-			var j = 0
 
 			$.each(json, function(i, item) {
-				j++;
 				var hora = json[i].hora
 				var id_remetente = "id="+json[i].id_user;
 				$.ajax({
@@ -241,7 +237,7 @@ function curtidas() {
 						var nick = json.nick
 						var qtd = parseInt(document.querySelector("#notifications").innerHTML)
 						var feed = document.querySelector("#notifications")
-						feed.innerHTML = j+qtd
+						feed.innerHTML = qtd + 1;
 						$('.aba-notifications').prepend('<div class="coments bg-not coments-profile text-black mg-t10 mg-b10 word-break-break"><p>'+nick+' curtiu um post seu.</p><p class="coments-hora">'+hora+'</p></div>')
 					}, 
 				});

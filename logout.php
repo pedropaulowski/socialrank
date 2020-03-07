@@ -1,7 +1,7 @@
 <?php
 session_start();
-
-session_unset();
-
+unset($_SESSION['nick']);
+session_write_close();
+session_destroy();
 header("Location:index.php");
 ?>
