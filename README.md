@@ -9,6 +9,9 @@ OBS: All users are fake.
 ***
 ![Meu Perfil](https://raw.githubusercontent.com/pedropaulowski/socialrank/master/templates/profiles.png)
 ***
+As you can see in the gif below, Social Rank has real time updates
+![Real time functions](https://github.com/pedropaulowski/socialrank/blob/master/templates/gifattrealtime.gif)
+
 ### Why a people rating network?
 
 What motivated me most was the fact that other social networks do not have an option to rate users (except those apps that users provide services are rated for the work done and not for their personality, friendliness or any other personal characteristics). Why not stop giving only like and deslikes when we can evaluate with grades?
